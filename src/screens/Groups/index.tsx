@@ -7,6 +7,7 @@ import { Highlight } from "@components/Highlight";
 import { ListEmpty } from "@components/ListEmpty";
 
 import { Container } from "./styles";
+import { Button } from "@components/Button";
 
 export function Groups() {
     const [groups, setGroups] = useState<string[]>(['Galera da Diretoria', '4teto'])
@@ -33,6 +34,8 @@ export function Groups() {
                     />
                 )}
             />
+
+            <Button title="Criar nova turma"/>
         </Container>        
     )
 }
