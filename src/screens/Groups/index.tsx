@@ -8,9 +8,16 @@ import { ListEmpty } from "@components/ListEmpty";
 
 import { Container } from "./styles";
 import { Button } from "@components/Button";
+import { useNavigation } from "@react-navigation/native";
 
 export function Groups() {
+    const { navigate } = useNavigation();
     const [groups, setGroups] = useState<string[]>(['Galera da Diretoria', '4teto'])
+
+
+    function handleNewGroups() {
+        navigate('newGroup')
+    }
 
     return (
         <Container>
@@ -35,7 +42,10 @@ export function Groups() {
                 )}
             />
 
-            <Button title="Criar nova turma"/>
+            <Button
+                title="Criar nova turma"
+                onPress={handleNewGroups}
+            />
         </Container>        
     )
 }
