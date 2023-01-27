@@ -1,17 +1,20 @@
-import { Header } from "@components/Header";
-import { Container, Form } from "./styles";
-import { Highlight } from "@components/Highlight";
-import { ButtonIcon } from "@components/ButtonIcon";
-import { Input } from "@components/Input";
-import { Filter } from "@components/Filter";
 import { FlatList } from "react-native";
 import { useState } from "react";
-import { HeaderList, NumbersOfPlayers } from "@components/Filter/styles";
 
+import { ButtonIcon } from "@components/ButtonIcon";
+import { Filter } from "@components/Filter";
+import { Header } from "@components/Header";
+import { Highlight } from "@components/Highlight";
+import { Input } from "@components/Input";
+import { ListEmpty } from "@components/ListEmpty";
+import { PlayerCard } from "@components/PlayerCard";
+
+import { Container, Form, HeaderList, NumbersOfPlayers }  from "./styles";
+import { Button } from "@components/Button";
 
 export function Players() {
     const [team, setTeam] = useState('time A');
-    const [players, setPlayers] = useState(['Jorge', 'Matheus', 'Diego']);
+    const [players, setPlayers] = useState(['Jorge', 'Matheus', 'Diego', 'Matheuse', 'casa', 'marcia', 'Marcos']);
 
     return (
         <Container>
@@ -52,6 +55,24 @@ export function Players() {
                     {players.length}
                 </NumbersOfPlayers>
             </HeaderList>
+            
+            <FlatList
+                data={players}
+                keyExtractor={item => item}
+                showsVerticalScrollIndicator={false}
+                renderItem={({ item }) => (
+                    <PlayerCard name={item} onRemove={()=>{}}/>
+                )}
+                ListEmptyComponent={() => (
+                    <ListEmpty message="Não existem pessoas nesse time"/>
+                )}
+                contentContainerStyle={[
+                    { paddingBottom: 100 },
+                    !players.length && { flex: 1 } 
+                ]}
+            />
+            
+            <Button title="Remover Turma" type="SECONDARY"/>
 
         </Container>
     )
