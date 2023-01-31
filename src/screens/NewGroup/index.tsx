@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { Button } from "@components/Button";
@@ -6,10 +7,9 @@ import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
 import { groupCreate } from "@storage/groupCreate";
+import { AppError } from "@utils/appError";
 
 import { Container, Content, Icon } from "./styles";
-import { AppError } from "@utils/appError";
-import { Alert } from "react-native";
 
 export function NewGroup() {
     const { navigate } = useNavigation();
@@ -47,6 +47,7 @@ export function NewGroup() {
                     placeholder="Nome da turma"
                     onChangeText={setGroup}
                     value={group}
+                    onSubmitEditing={handleNew}
                 />
                 
                 <Button
