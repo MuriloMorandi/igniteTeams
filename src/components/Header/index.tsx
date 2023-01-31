@@ -8,10 +8,10 @@ interface HeaderProps{
 }
 
 export function Header({showBackButton = false}:HeaderProps) {
-    const { goBack } = useNavigation();
+    const { navigate } = useNavigation();
     
     function handleGoBack() {
-        goBack()
+        navigate('groups')
     }
 
     return (

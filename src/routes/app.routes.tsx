@@ -14,7 +14,7 @@ export function AppRoutes() {
                 animation: "fade_from_bottom"
             }}
         >
-            <Screen name="v" component={Groups} />
+            <Screen name="groups" component={Groups} />
             <Screen name="players" component={Players} />
             <Screen name="newGroup" component={NewGroup} />
         </Navigator>
