@@ -22,11 +22,11 @@ export function NewGroup() {
         } catch (error) {
             if (error instanceof AppError)
             {
-                Alert.alert('Novo Grupo', error.message)
+                Alert.alert('Nova Tumma', error.message)
             }
             else
             {
-                Alert.alert("Novo Groupo", "Não foi possivel  criar um novo groupo");
+                Alert.alert("Nova Turma", "Não foi possivel criar uma nova turma");
                 console.log(error)
             }
 

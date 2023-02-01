@@ -7,12 +7,14 @@ import { GroupCard } from "@components/GroupCard";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { ListEmpty } from "@components/ListEmpty";
+import { Loading } from "@components/Loading";
 import { groupsGetAll } from "@storage/groupsGetAll";
 
 import { Container } from "./styles";
 
 export function Groups() {
     const { navigate } = useNavigation();
+    const [loading, setLoading] = useState(true);
     const [groups, setGroups] = useState<string[]>([])
 
     function handleNewGroup() {
@@ -24,13 +26,19 @@ export function Groups() {
     }
 
     async function fetchtGroups() {
-        try {
-            const data = await groupsGetAll()
-            setGroups(data);
+        try{
+            setLoading(true)
             
+            const data = await groupsGetAll()
+            
+            setGroups(data);
         } catch (error) {
             console.log(error)
+        } finally
+        {
+            setLoading(false)
         }
+
     }
 
     useFocusEffect(useCallback(() => {
@@ -45,28 +53,34 @@ export function Groups() {
                 title="Turmas"
                 subTitle="jogue com a sua turma"
             />
-
-            <FlatList
-                data={groups}
-                renderItem={({ item }) => (
-                    <GroupCard
-                        title={item}
-                        onPress={()=>handleOpenGroup(item)}
+            {loading ?
+                <Loading/>
+            :
+                <>
+                    <FlatList
+                        data={groups}
+                        renderItem={({ item }) => (
+                            <GroupCard
+                                title={item}
+                                onPress={()=>handleOpenGroup(item)}
+                            />
+                        )}
+                        keyExtractor={item => item}
+                        contentContainerStyle={!groups.length && {flex:1}}
+                        ListEmptyComponent={() => (
+                            <ListEmpty
+                                message="Que tal cadastrar uma turma"
+                            />
+                        )}
                     />
-                )}
-                keyExtractor={item => item}
-                contentContainerStyle={!groups.length && {flex:1}}
-                ListEmptyComponent={() => (
-                    <ListEmpty
-                        message="Que tal cadastrar um groupo"
-                    />
-                )}
-            />
 
-            <Button
-                title="Criar nova turma"
-                onPress={handleNewGroup}
-            />
+                    <Button
+                        title="Criar nova turma"
+                        onPress={handleNewGroup}
+                    />
+                </>
+            }
+            
         </Container>        
     )
 }
