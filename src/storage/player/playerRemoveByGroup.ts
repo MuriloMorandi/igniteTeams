@@ -5,7 +5,6 @@ import { PLAYER_COLLECTION } from "@storage/keys";
 export async function playerRemoveBygroup(playerName:string, group: string) {
     try
     {
-        console.log(playerName)
         const storage = await playerGetAllByGroup(group);
 
         const playerFiltered = storage
